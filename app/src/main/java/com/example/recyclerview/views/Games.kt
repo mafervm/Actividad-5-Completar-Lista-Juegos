@@ -1,4 +1,4 @@
-package com.example.recyclerview.ui.theme.views
+package com.example.recyclerview.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
