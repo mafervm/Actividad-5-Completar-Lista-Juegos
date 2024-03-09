@@ -20,10 +20,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.recyclerview.R
+import com.example.recyclerview.models.Game
 
-@Preview(showBackground = true)
+
 @Composable
-fun CardGame(){
+fun CardGame(game: Game){
     Card(modifier = Modifier.padding (8.dp)){
         Row(modifier = Modifier.fillMaxWidth()){
             //Imagen
@@ -31,7 +32,7 @@ fun CardGame(){
                 modifier = Modifier
                     .height(170.dp)
                     .width(120.dp),
-                painter = painterResource(id = R.drawable.minecraft),
+                painter = painterResource(id = game.image),
                 contentDescription = "ImagenDelJuego",
                 contentScale = ContentScale.Crop
             )
@@ -39,11 +40,11 @@ fun CardGame(){
             Spacer(modifier = Modifier.width(8.dp))
             Column {
                 Text(
-                    text = "Minecraft",
+                    text = game.name,
                     modifier = Modifier.padding(top = 8.dp),
                     color = Color(0xFFF9A736)
                 )
-                GameDataView()
+                GameDataView( Modifier.fillMaxWidth(), game.console, game.price)
                 Button(onClick = { }, colors = ButtonDefaults.buttonColors(Color(0xFF6994F9))) {
                     Text(text = "Comprar")
                 }
