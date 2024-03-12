@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -41,7 +42,7 @@ fun MainView(){
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ){
-        LazyColumn{
+        LazyRow{
             items(gamesViewModel.getGameList()){game ->
                 //dentro de los parentesis va la lista o arreglo de datos
                 //dentro de las llaver seria la vista a repetir
