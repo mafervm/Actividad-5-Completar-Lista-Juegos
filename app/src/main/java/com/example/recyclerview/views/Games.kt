@@ -24,7 +24,7 @@ import com.example.recyclerview.models.Game
 
 
 @Composable
-fun CardGame(game: Game){
+fun GameCard(game: Game){
     Card(modifier = Modifier.padding (8.dp)){
         Row(modifier = Modifier.fillMaxWidth()){
             //Imagen
