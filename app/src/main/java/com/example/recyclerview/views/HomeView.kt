@@ -29,7 +29,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.recyclerview.R
 
-
 @Composable
 fun HomeView(navController: NavHostController) {
 
@@ -61,7 +60,7 @@ fun HomeView(navController: NavHostController) {
                 Icon (
                     painter = painterResource(id = R.drawable.age),
                     contentDescription = "Password",
-                    tint = Color(0xFF009688),
+                    tint = Color(0xFF77CCC4),
                 )},
         )
 

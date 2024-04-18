@@ -1,6 +1,7 @@
 package com.example.recyclerview.views
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -54,99 +55,103 @@ fun GameView(navController: NavHostController, age: Int, budget: Int) {
     var available: Int by remember { mutableStateOf(budget) }
     var total: Int by remember { mutableStateOf(0) }
 
-    Column (
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp),
+            .background(Color(0xFFBAC5C4)) // Color de fondo añadido
     ) {
-
-        Box (
-            modifier = Modifier.fillMaxWidth()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp),
         ) {
-            Button(
-                onClick = {navController.popBackStack()},
-                colors = ButtonDefaults.buttonColors(Color(0xFF009688)),
+            Box(
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "<", fontWeight = FontWeight.Bold)
-            }
-
-            Text(
-                text = "Videojuegos",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(5.dp))
-
-        Text(
-            text = "Total: $$total",
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
-        )
-
-        Spacer(modifier = Modifier.height(2.dp))
-
-        Text(
-            text = "Disponible: $$available",
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
-        )
-
-        Spacer(modifier = Modifier.height(2.dp))
-
-        Text(
-            text = "Edad: $age",
-            fontSize = 18.sp
-        )
-
-        Spacer(modifier = Modifier.height(2.dp))
-
-        Button(
-            onClick = {navController.navigate("FinalView/$total")},
-            colors = ButtonDefaults.buttonColors(Color(0xFF009688)),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Finalizar compra", fontWeight = FontWeight.Bold)
-        }
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        LazyColumn {
-            items(GamesViewModel.getGameList()) {
-                    game ->
-
-                GameCard(game)
-
-                Spacer(modifier = Modifier.height(5.dp))
-
                 Button(
-                    onClick = {
-                        val isAbleToBuy = AgeCheck(age, game.classification)
-
-                        if (isAbleToBuy) {
-                            if (available >= game.price) {
-                                available = available - game.price
-                                total = total + game.price
-                            } else {
-                                Toast
-                                    .makeText(Context, "Fondos insuficientes.", Toast.LENGTH_LONG)
-                                    .show()
-                            }
-                        } else {
-                            Toast
-                                .makeText(Context, "Tu edad no te permite comprar este videojuego.", Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(Color(0xFF673AB7)),
-                    modifier = Modifier.fillMaxWidth()
+                    onClick = { navController.popBackStack() },
+                    colors = ButtonDefaults.buttonColors(Color(0xFF77CCC4)),
                 ) {
-                    Text(text = "Agregar")
+                    Text(text = "<", fontWeight = FontWeight.Bold)
                 }
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = "Videojuegos",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 30.sp,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Text(
+                text = "Total: $$total",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+
+            Spacer(modifier = Modifier.height(2.dp))
+
+            Text(
+                text = "Disponible: $$available",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+
+            Spacer(modifier = Modifier.height(2.dp))
+
+            Text(
+                text = "Edad: $age",
+                fontSize = 18.sp
+            )
+
+            Spacer(modifier = Modifier.height(2.dp))
+
+            Button(
+                onClick = { navController.navigate("FinalView/$total") },
+                colors = ButtonDefaults.buttonColors(Color(0xFF77CCC4)),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 90.dp)
+            ) {
+                Text(text = "Finalizar compra", fontWeight = FontWeight.Bold)
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            LazyColumn {
+                items(GamesViewModel.getGameList()) { game ->
+
+                    GameCard(game)
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    Button(
+                        onClick = {
+                            val isAbleToBuy = AgeCheck(age, game.classification)
+
+                            if (isAbleToBuy) {
+                                if (available >= game.price) {
+                                    available = available - game.price
+                                    total = total + game.price
+                                } else {
+                                    Toast
+                                        .makeText(Context, "Fondos insuficientes.", Toast.LENGTH_LONG)
+                                        .show()
+                                }
+                            } else {
+                                Toast
+                                    .makeText(Context, "Tu edad no te permite comprar este videojuego.", Toast.LENGTH_LONG)
+                                    .show()
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(Color(0xFF628683)),
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 90.dp)
+                    ) {
+                        Text(text = "Agregar")
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
             }
         }
     }
@@ -155,5 +160,5 @@ fun GameView(navController: NavHostController, age: Int, budget: Int) {
 @Preview(showBackground = true)
 @Composable
 fun Preview_Game() {
-    GameView(navController = rememberNavController(), 18, 10000)
+    GameView(navController = rememberNavController(), age = 18, budget = 10000)
 }

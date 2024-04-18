@@ -30,19 +30,20 @@ fun FinalView(navController: NavHostController, total: Int) {
     ) {
         Text(
             text = "Total: $$total",
-            fontWeight = FontWeight.Bold,
             fontSize = 30.sp,
-            color = Color(0xFF009688)
+            color = Color(0xFF0F0C0C)
         )
 
         Spacer(modifier = Modifier.height(15.dp))
 
         Button(
             onClick = {navController.popBackStack()},
-            colors = ButtonDefaults.buttonColors(Color(0xFF009688)),
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 30.dp)
+            colors = ButtonDefaults.buttonColors(Color(0xFF77CCC4)),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 110.dp)
         ) {
-            Text(text = "Volver", fontWeight = FontWeight.Bold)
+            Text(text = "Volver",
+            fontSize = 20.sp,
+            color = Color(0xFF0F0C0C))
         }
     }
 }
